@@ -67,9 +67,9 @@ with tab_alumno:
 
 with tab_profesor:
     st.subheader("Acceso Restringido")
-    password = st.text_input("Contraseña de docente:", type="password")
+    admin_password = st.secrets.get("ADMIN_PASSWORD", "clave_backup_local")
     
-    if password == "profesor2026":  # Cambia esta contraseña
+    if password == admin_password: 
         if os.path.exists(DATA_FILE):
             df = pd.read_csv(DATA_FILE)
             if not df.empty:
