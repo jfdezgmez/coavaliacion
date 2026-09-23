@@ -207,7 +207,7 @@ with tab_profesor:
                 return "background-color: #f4cccc; color: #6b0000"
 
         st.dataframe(
-            resumen.style.applymap(cor_nota, subset=["Nota coevaluación (sobre 10)"]),
+            resumen.style.map(cor_nota, subset=["Nota coevaluación (sobre 10)"]),
             use_container_width=True,
         )
 
