@@ -190,10 +190,24 @@ with tab_profesor:
             "A nota calcúlase como a media das avaliacións recibidas (excluída a autoevaluación). "
             "Escala: 1 → 0,00 pts · 3 → 5,00 pts · 5 → 10,00 pts."
         )
+
+        def cor_nota(val):
+            """Coloración CSS sen necesidade de matplotlib."""
+            try:
+                v = float(val)
+            except (TypeError, ValueError):
+                return ""
+            if v >= 8:
+                return "background-color: #c6efce; color: #276221"
+            elif v >= 6:
+                return "background-color: #ffeb9c; color: #7d6608"
+            elif v >= 4:
+                return "background-color: #ffc7ce; color: #9c1d25"
+            else:
+                return "background-color: #f4cccc; color: #6b0000"
+
         st.dataframe(
-            resumen.style.background_gradient(
-                subset=["Nota coevaluación (sobre 10)"], cmap="RdYlGn", vmin=0, vmax=10
-            ),
+            resumen.style.applymap(cor_nota, subset=["Nota coevaluación (sobre 10)"]),
             use_container_width=True,
         )
 
